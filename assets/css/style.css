@@ -1,3 +1,9 @@
-.container {
-    display: grid;
+.ex1 {
+    background-color: red;
+}
+.ex2 {
+    background-color: green;
+}
+.ex3 {
+    background-color: blue;
 }
