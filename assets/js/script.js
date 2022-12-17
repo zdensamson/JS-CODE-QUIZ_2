@@ -53,7 +53,13 @@ var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
 
 var startQuiz = function(){
-    console.log("hello world");
+    var timeSecond = 100;
+    
+    
+    const countDown = setInterval(() => {
+        timeSecond--;
+        timeBoxEl.innerHTML = timeSecond;
+    }, 1000);
 }
 
 startBtnEl.addEventListener("click", startQuiz);
