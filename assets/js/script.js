@@ -24,7 +24,6 @@
 // var chessBoard = function(size) {
 //     let rowOne = ' ';
 //     let rowTwo = '#';
-
 //     for(i=0; i<size; i++){
 //         if(i%2 == 0) {
 //             rowOne = rowOne + '#';
@@ -33,9 +32,7 @@
 //             rowOne = rowOne + ' ';
 //             rowTwo = rowTwo + '#';
 //         }
-    
 //     }
-
 //     for(i=0; i<size; i++){
 //         //console.log(i);
 //         if(i%2 == 0){
@@ -48,18 +45,48 @@
 // triangle();
 // fizzBuzz();
 // chessBoard(size);
+// var findMin = function(a,b) {
+//     if(a < b) {
+//         console.log(a)
+//     } else {
+//         console.log(b)
+//     }
+// };
+// var isEven = function(number) {
+//     if(number < 0){
+//         isEven(-1*number)
+//     }
+//     else if(number == 1){
+//         console.log("ODD")
+//     } else if(number == 0){
+//         console.log("EVEN")
+//     } else {
+//         isEven(number - 2)
+//     }
+// }
 
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
+var questionBoxEl = document.querySelector(".question");
 
-var startQuiz = function(){
-    var timeSecond = 100;
-    
-    
-    const countDown = setInterval(() => {
-        timeSecond--;
-        timeBoxEl.innerHTML = timeSecond;
-    }, 1000);
+var questionObj = {
+    "Who is Peter Parker?": {1:"Spider Man", 0:"Iron Man", 0:"Super Man", 0:"The Hulk"},
+    "Who is Bruce Wayne": {0:"Nacho Libre", 0:"Star Lord" , 0:"Mr. Fantastic", 1:"The Batman"},
+    "Who is Bruce Banner": {0:"Ant Man", 1:"The Hulk", 0:"Green Lantern", 0:"Plastic Man"}
 }
 
-startBtnEl.addEventListener("click", startQuiz);
+var startQuiz = function(){
+
+    var countDown = function(){
+        var timeSecond = 100;
+        const countDown = setInterval(() => {
+            timeSecond--;
+            timeBoxEl.innerHTML = timeSecond;
+        }, 1000);
+    }
+
+    countDown();
+}
+
+
+startBtnEl.addEventListener("click",startQuiz)
