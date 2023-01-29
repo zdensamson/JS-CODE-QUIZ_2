@@ -68,11 +68,22 @@
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
 var questionBoxEl = document.querySelector(".question");
+var optionBoxEl = document.querySelector("#answer-container");
 
-var questionObj = {
-    "Who is Peter Parker?": {1:"Spider Man", 0:"Iron Man", 0:"Super Man", 0:"The Hulk"},
-    "Who is Bruce Wayne": {0:"Nacho Libre", 0:"Star Lord" , 0:"Mr. Fantastic", 1:"The Batman"},
-    "Who is Bruce Banner": {0:"Ant Man", 1:"The Hulk", 0:"Green Lantern", 0:"Plastic Man"}
+var answerObj = {
+    "The Hulk": ["Spider Man", "Iron Man", "Super Man", "The Hulk"],
+    "Spider Man": ["Nacho Libre", "Spider Man", "Mr. Fantastic", "Star Lord"],
+    "The Batman": ["Ant Man", "Green Lantern", "The Batman", "Plastic Man"]
+}
+var questionList = ["Who is Bruce Banner", "Who is Peter Parker?","Who is Bruce Wayne"]
+
+var questionBuilder = function(question, answer, options) {
+    questionBoxEl.textContent = question;
+
+    
+    var optionEl = document.createElement("div");
+    optionEl.className = "box"
+
 }
 
 var startQuiz = function(){
@@ -85,8 +96,10 @@ var startQuiz = function(){
         }, 1000);
     }
 
+    questionBoxEl.textContent = questionList[0];
+    console.log(optionBoxEl.children)
     countDown();
 }
 
 
-startBtnEl.addEventListener("click",startQuiz)
+startBtnEl.addEventListener("click",startQuiz);
