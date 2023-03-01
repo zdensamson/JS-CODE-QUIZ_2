@@ -70,6 +70,8 @@ var timeBoxEl = document.querySelector(".timer");
 var questionBoxEl = document.querySelector(".question");
 var optionBoxEl = document.querySelector("#answer-container");
 
+var exampleBoxEl = document.querySelector("#example");
+
 var answerObj = {
     "The Hulk": ["Spider Man", "Iron Man", "Super Man", "The Hulk"],
     "Spider Man": ["Nacho Libre", "Spider Man", "Mr. Fantastic", "Star Lord"],
@@ -77,13 +79,51 @@ var answerObj = {
 }
 var questionList = ["Who is Bruce Banner", "Who is Peter Parker?","Who is Bruce Wayne"]
 
-var questionBuilder = function(question, answer, options) {
+// console.log(Object.keys(answerObj)[0]);
+// console.log(Object.values(answerObj)[0]);
+// console.log(Object.entries(answerObj)[0]);
+
+
+var questionQueue = function() {
+    questionBuilder(questionList[0]);
+    optionBuilder(Object.keys(answerObj)[0],Object.values(answerObj)[0]);
+}
+
+var questionBuilder = function(question) {
     questionBoxEl.textContent = question;
+}
 
-    
-    var optionEl = document.createElement("div");
-    optionEl.className = "box"
+var optionBuilder = function(answer, options) {
+    var currentAnswer = answer; 
+    console.log(options);
 
+    for(var i = 0; i < options.length; i++){
+        var optionEl = document.createElement("div");
+        optionEl.className = "box";
+        if(options[i] == answer) {
+            optionEl.setAttribute("data-boolean", "correct");
+        } 
+        // else {
+        //     optionEl.setAttribute("data-boolean", "incorrect");
+        // }
+        // optionEl.className.textContent = options[i];
+        optionEl.textContent = options[i];
+        optionBoxEl.append(optionEl);
+    }
+
+}
+
+var selectedAnswerHandler = function(event) {
+    console.log(event.target);
+    var targetEl = event.target;
+    console.log(questionBoxEl.textContent);
+    if (targetEl.getAttribute("data-boolean") == "correct") {
+        console.log("CORRECT");
+        // fucntion to load next question
+    }
+    else {
+        console.log("INCORRECT");
+    }
 }
 
 var startQuiz = function(){
@@ -95,11 +135,11 @@ var startQuiz = function(){
             timeBoxEl.innerHTML = timeSecond;
         }, 1000);
     }
-
-    questionBoxEl.textContent = questionList[0];
-    console.log(optionBoxEl.children)
+    questionQueue();
+    // questionBoxEl.textContent = questionList[0];
     countDown();
 }
 
 
 startBtnEl.addEventListener("click",startQuiz);
+optionBoxEl.addEventListener("click",selectedAnswerHandler);
