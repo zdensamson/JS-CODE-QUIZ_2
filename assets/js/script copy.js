@@ -8,7 +8,8 @@ var gameEl = document.querySelector("#game-shell");
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
 var questionBoxEl = document.querySelector(".question");
-
+var optionBoxEl = document.querySelector("#answer-container");
+var responseBoxEl = document.querySelector(".response");
 var exampleBoxEl = document.querySelector("#example");
 var players = [];
 
@@ -23,20 +24,6 @@ var questionNumber = 0;
 var timeSecond = 100;
 var gameActive = 0;
 var errorCount = 0;
-
-var gameBuilder = function() {
-    var qBox = document.createElement("h1");
-    qBox.setAttribute("id", "answer-container");
-    gameEl.append(qBox);
-
-    var aBox = document.createElement("div");
-    aBox.setAttribute("id", "answer-container");
-    gameEl.append(aBox);
-
-    var rBox = document.createElement("div");
-    rBox.setAttribute("class", "response");
-    gameEl.append(rBox);    
-}
 
 var questionQueue = function(qNumber) {
     questionBuilder(questionList[qNumber]);
@@ -107,7 +94,7 @@ var gameWin = function(){
 };
 
 var startQuiz = function(){
-    gameBuilder();
+    
     gameActive = 1;
     var countDown = function(){
        
@@ -128,7 +115,6 @@ var submitFormHandler = function(event){
     var currentName = document.querySelector("input[name='player-name']").value;
     players.push ({name: currentName, score: timeSecond});
     savePlayer(players);
-
 
 
 };
