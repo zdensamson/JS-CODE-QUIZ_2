@@ -7,7 +7,7 @@
 var gameEl = document.querySelector("#game-shell");
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
-var questionBoxEl = document.querySelector(".question");
+// var questionBoxEl = document.querySelector(".question");
 
 var exampleBoxEl = document.querySelector("#example");
 var players = [];
@@ -26,7 +26,7 @@ var errorCount = 0;
 
 var gameBuilder = function() {
     var qBox = document.createElement("h1");
-    qBox.setAttribute("id", "answer-container");
+    qBox.setAttribute("id", "question-container");
     gameEl.append(qBox);
 
     var aBox = document.createElement("div");
@@ -36,6 +36,8 @@ var gameBuilder = function() {
     var rBox = document.createElement("div");
     rBox.setAttribute("class", "response");
     gameEl.append(rBox);    
+
+    aBox.addEventListener("click",selectedAnswerHandler);
 }
 
 var questionQueue = function(qNumber) {
@@ -44,10 +46,12 @@ var questionQueue = function(qNumber) {
 };
 
 var questionBuilder = function(question) {
-    questionBoxEl.textContent = question;
+    var questionEl = document.querySelector('#question-container')
+    questionEl.textContent = question;
 };
 
 var optionBuilder = function(answer, options) {
+    var optionBoxEl = document.querySelector('#answer-container');
     optionBoxEl.innerHTML = ''
     for(var i = 0; i < options.length; i++){
         var optionEl = document.createElement("div");
@@ -62,8 +66,10 @@ var optionBuilder = function(answer, options) {
 };
 
 var selectedAnswerHandler = function(event) {
+    console.log('HIIII')
 
     var targetEl = event.target;
+    var responseBoxEl = document.querySelector('.response');
 
     if (targetEl.getAttribute("data-boolean") == "correct") {
         responseBoxEl.textContent = "CORRECT";
@@ -107,6 +113,7 @@ var gameWin = function(){
 };
 
 var startQuiz = function(){
+    console.log('YO')
     gameBuilder();
     gameActive = 1;
     var countDown = function(){
@@ -139,4 +146,4 @@ var savePlayer = function(saveGameObj) {
 }
 
 startBtnEl.addEventListener("click",startQuiz);
-optionBoxEl.addEventListener("click",selectedAnswerHandler);
+// aBox.addEventListener("click",selectedAnswerHandler);
