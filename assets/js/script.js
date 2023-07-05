@@ -133,6 +133,8 @@ var submitFormHandler = function(event){
     }
     event.preventDefault();
     var currentName = document.querySelector("input[name='player-name']").value;
+    var oldScore = localStorage.getItem("scores");
+    players.push(JSON.parse(oldScore));
     players.push ({name: currentName, score: timeSecond});
     savePlayer(players);
 
@@ -142,7 +144,11 @@ var submitFormHandler = function(event){
 
 var savePlayer = function(saveGameObj) {
     console.log(saveGameObj);
-    localStorage.setItem("scores", JSON.stringify(saveGameObj));
+    // var oldScore = localStorage.getItem("scores");
+    // players.push(oldScore);
+    // console.log(players);
+    // // players.push(saveGameObj);
+    localStorage.setItem("scores", JSON.stringify(players));
 }
 
 startBtnEl.addEventListener("click",startQuiz);
