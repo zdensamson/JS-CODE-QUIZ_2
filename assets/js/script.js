@@ -134,9 +134,20 @@ var submitFormHandler = function(event){
     event.preventDefault();
     var currentName = document.querySelector("input[name='player-name']").value;
     var oldScore = localStorage.getItem("scores");
-    players.push(JSON.parse(oldScore));
-    players.push ({name: currentName, score: timeSecond});
-    savePlayer(players);
+    if(oldScore == null){
+        players.push ({name: currentName, score: timeSecond});
+        savePlayer(players);
+    } else {
+        scoreList = JSON.parse(oldScore);
+        for(var i = 0; i < scoreList.length; i++){
+            console.log(scoreList.length);
+            players.push(scoreList[i]);
+            debugger;
+        }
+        // players.push(JSON.parse(oldScore));
+        players.push ({name: currentName, score: timeSecond});
+        savePlayer(players);
+    }
 
 
 
