@@ -7,6 +7,7 @@
 var gameEl = document.querySelector("#game-shell");
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
+var scoreBtnEl = document.querySelector(".hi-scores");
 // var questionBoxEl = document.querySelector(".question");
 
 var exampleBoxEl = document.querySelector("#example");
@@ -113,6 +114,7 @@ var gameWin = function(){
 };
 
 var startQuiz = function(){
+    // gameEl.innerHTML = '';
     console.log('YO')
     gameBuilder();
     gameActive = 1;
@@ -162,5 +164,21 @@ var savePlayer = function(saveGameObj) {
     localStorage.setItem("scores", JSON.stringify(players));
 }
 
+var viewScores = function(){
+    // console.log('SCORE');
+    var scoreRanking = JSON.parse(localStorage.getItem("scores"));
+    console.log(scoreRanking);
+    console.log(scoreRanking.length);
+    for(var i = 0; i < scoreRanking.length; i++){
+        var scoreBox = document.createElement("div");
+        console.log(scoreRanking[i].name);
+        console.log(scoreRanking[i].score);
+        scoreBox.textContent = `PLAYER: ${scoreRanking[i].name} /// TIME SCORE: ${scoreRanking[i].score}`;
+        gameEl.append(scoreBox);
+    }
+};
+
 startBtnEl.addEventListener("click",startQuiz);
+scoreBtnEl.addEventListener("click",viewScores);
+
 // aBox.addEventListener("click",selectedAnswerHandler);

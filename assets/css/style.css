@@ -18,6 +18,8 @@ h1 {
 
 .control{
     border-style: solid;
+    display: flex;
+    justify-content: center;
     /* margin: 5%; */
     height: 50px;
     margin: 0 0 5% 0;
@@ -26,18 +28,28 @@ h1 {
     background-color: yellow;
     float: left;
     text-align: center;
-    width: 40%;
+    width: 30%;
     height: 100%;
-    margin: 0 5%;
+    margin: 0 3%;
 }
+
+.hi-scores {
+    background-color: yellow;
+    float: left;
+    text-align: center;
+    width: 30%;
+    height: 100%;
+    margin: 0 3%;
+}
+
 
 .timer {
     background-color: lightgreen;
     float: left;
     text-align: center;
-    width: 40%;
+    width: 30%;
     height: 100%;
-    margin: 0 5%;
+    margin: 0 3%;
 }
 
 #answer-container {
