@@ -4,7 +4,8 @@
 // restarting game 
 
 
-var gameEl = document.querySelector("#game-shell");
+// var gameEl = document.querySelector("#game-shell");
+var gameEl = document.querySelector(".action-box");
 var startBtnEl = document.querySelector(".start");
 var timeBoxEl = document.querySelector(".timer");
 var scoreBtnEl = document.querySelector(".hi-scores");
@@ -67,7 +68,6 @@ var optionBuilder = function(answer, options) {
 };
 
 var selectedAnswerHandler = function(event) {
-    console.log('HIIII')
 
     var targetEl = event.target;
     var responseBoxEl = document.querySelector('.response');
@@ -89,7 +89,6 @@ var selectedAnswerHandler = function(event) {
     }
     if(timeSecond < 0 || timeSecond == 0) {
         gameWin();
-        console.log("negative")
     }
 };
 
@@ -114,7 +113,7 @@ var gameWin = function(){
 };
 
 var startQuiz = function(){
-    // gameEl.innerHTML = '';
+    gameEl.innerHTML = '';
     console.log('YO')
     gameBuilder();
     gameActive = 1;
@@ -142,7 +141,7 @@ var submitFormHandler = function(event){
     } else {
         scoreList = JSON.parse(oldScore);
         for(var i = 0; i < scoreList.length; i++){
-            console.log(scoreList.length);
+
             players.push(scoreList[i]);
         
         }
@@ -159,20 +158,17 @@ var savePlayer = function(saveGameObj) {
     console.log(saveGameObj);
     // var oldScore = localStorage.getItem("scores");
     // players.push(oldScore);
-    // console.log(players);
     // // players.push(saveGameObj);
     localStorage.setItem("scores", JSON.stringify(players));
+    viewScores();
 }
 
 var viewScores = function(){
-    // console.log('SCORE');
+    gameEl.innerHTML='';
     var scoreRanking = JSON.parse(localStorage.getItem("scores"));
-    console.log(scoreRanking);
-    console.log(scoreRanking.length);
+
     for(var i = 0; i < scoreRanking.length; i++){
         var scoreBox = document.createElement("div");
-        console.log(scoreRanking[i].name);
-        console.log(scoreRanking[i].score);
         scoreBox.textContent = `PLAYER: ${scoreRanking[i].name} /// TIME SCORE: ${scoreRanking[i].score}`;
         gameEl.append(scoreBox);
     }
