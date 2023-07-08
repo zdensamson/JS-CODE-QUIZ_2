@@ -144,7 +144,7 @@ var submitFormHandler = function(event){
         for(var i = 0; i < scoreList.length; i++){
             console.log(scoreList.length);
             players.push(scoreList[i]);
-            debugger;
+        
         }
         // players.push(JSON.parse(oldScore));
         players.push ({name: currentName, score: timeSecond});
