@@ -25,6 +25,7 @@ var questionNumber = 0;
 var timeSecond = 100;
 var gameActive = 0;
 var errorCount = 0;
+var gameWinFlag = 0;
 
 var gameBuilder = function() {
     var qBox = document.createElement("h1");
@@ -96,6 +97,8 @@ var gameWin = function(){
     if(timeSecond < 0) {
         timeSecond = 0;
     }
+    timerHandler(1);
+    timeBoxEl.innerHTML = 0;
     gameEl.innerHTML = "";
     gameEl.textContent = `You got a score of ${timeSecond} seconds, and guessed incorrectly ${errorCount} time(s) `
     var scoreForm = document.createElement("form");
@@ -112,20 +115,41 @@ var gameWin = function(){
     scoreForm.addEventListener("submit", submitFormHandler);
 };
 
-var startQuiz = function(){
-    gameEl.innerHTML = '';
-    console.log('YO')
-    gameBuilder();
-    gameActive = 1;
-    var countDown = function(){
-       
-        const countDown = setInterval(() => {
-            timeSecond--;
-            timeBoxEl.innerHTML = timeSecond;
-        }, 1000);
+var timerHandler = function(gameStatus){
+    if(gameStatus == 0){
+        var countDown = function(){
+            const countDown = setInterval(() => {
+                timeSecond--;
+                timeBoxEl.innerHTML = timeSecond;
+            }, 1000);
+        }
+        countDown();
+    }else {
+        console.log('GAME WIN')
+        debugger;
+        clearInterval(countDown);
     }
+    // console.log(gameStatus);
+    // var countDown = function(){
+    //     const countDown = setInterval(() => {
+    //         timeSecond--;
+    //         timeBoxEl.innerHTML = timeSecond;
+    //     }, 1000);
+    // }
+    // countDown();
+
+}
+
+var startQuiz = function(){
+    console.log('start this ish')
+    gameEl.innerHTML = '';
+    gameBuilder(0);
+    gameActive = 1;
+
+
+    questionNumber = 0;
     questionQueue(questionNumber);
-    countDown();
+    timerHandler(0);
 };
 
 var submitFormHandler = function(event){
