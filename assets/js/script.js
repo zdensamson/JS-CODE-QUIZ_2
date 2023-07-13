@@ -116,28 +116,16 @@ var gameWin = function(){
 };
 
 var timerHandler = function(gameStatus){
-    if(gameStatus == 0){
-        var countDown = function(){
-            const countDown = setInterval(() => {
-                timeSecond--;
-                timeBoxEl.innerHTML = timeSecond;
-            }, 1000);
-        }
-        countDown();
-    }else {
+    var cd2 = function(){
+        timeSecond--;
+        timeBoxEl.innerHTML = timeSecond;
+    };
+    var cdEx = setInterval(cd2, 1000);
+    if(gameStatus == 1){
         console.log('GAME WIN')
         debugger;
-        clearInterval(countDown);
+        clearInterval(cdEx);
     }
-    // console.log(gameStatus);
-    // var countDown = function(){
-    //     const countDown = setInterval(() => {
-    //         timeSecond--;
-    //         timeBoxEl.innerHTML = timeSecond;
-    //     }, 1000);
-    // }
-    // countDown();
-
 }
 
 var startQuiz = function(){
@@ -187,15 +175,30 @@ var savePlayer = function(saveGameObj) {
     viewScores();
 }
 
+var deleteAllScores = function(){
+    localStorage.clear();
+}
+
 var viewScores = function(){
     gameEl.innerHTML='';
     var scoreRanking = JSON.parse(localStorage.getItem("scores"));
 
+    if(scoreRanking == null){
+        var noScoreMessage = document.createElement("div");
+        noScoreMessage.textContent = 'NO SCORES TO DISPLAY';
+        gameEl.append(noScoreMessage);
+    } else {
     for(var i = 0; i < scoreRanking.length; i++){
         var scoreBox = document.createElement("div");
         scoreBox.textContent = `PLAYER: ${scoreRanking[i].name} /// TIME SCORE: ${scoreRanking[i].score}`;
         gameEl.append(scoreBox);
+        } 
     }
+
+    var deleteScoreBtn = document.createElement("button");
+    deleteScoreBtn.textContent = "Delete all scores?"
+    gameEl.append(deleteScoreBtn);
+    deleteScoreBtn.addEventListener("click", deleteAllScores);
 };
 
 startBtnEl.addEventListener("click",startQuiz);
